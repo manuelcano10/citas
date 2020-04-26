@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
 
-
 dbquotes = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -9,16 +8,24 @@ dbquotes = mysql.connector.connect(
   database="citas"
 )
 
-
 app = Flask(__name__)
 
+
 @app.route('/')
-def home():
+def index():
     sql = "SELECT * FROM citasapp"
     cur = dbquotes.cursor()
     cur.execute(sql)
     result = cur.fetchall()
     return render_template('home.html', quotes = result)
+
+@app.route('/eliminar')
+def delete():
+    cur = dbquotes.cursor()
+    sql = "DELETE FROM citasapp"
+    cur.execute(sql)
+    dbquotes.commit()
+
 
 @app.route('/citas')
 def citas():
@@ -39,7 +46,7 @@ def addquote():
         sql = f"INSERT INTO citasapp (nombre,apellido,documento,fecha_nacimiento,ciudad,barrio,celular) VALUES ('{name}','{surname}','{document}','{birth_date}','{city}','{neighborhood}','{mobile}')"
         cur.execute(sql)
         dbquotes.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     return "Error"
 
 

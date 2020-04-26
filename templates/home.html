@@ -1,29 +1,40 @@
 {% extends "layout.html"%}
 {% block content %}
+    <br>
     <h1 style="text-align: center;">Citas Asignadas</h1>
-    <table class="table">
+    <br>
+    <div class="container">
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Documento</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Ciudad</th>
-            <th scope="col">Barrio</th>
-            <th scope="col">Celular</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Documento</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Barrio</th>
+              <th scope="col">Celular</th>
+              <th scope="col">Acciones</th>
+
           </tr>
         </thead>
         <tbody>
-            {% for perro in quotes %} <!--Se puede utilizar cualquier palabra, en este caso "perro"-->
+            {% for i in quotes %} <!--Se puede utilizar cualquier palabra, en este caso "perro"-->
             <tr> 
-                <td>{{perro.0}}</td>
-                <td>{{perro.1}}</td>
-                <td>{{perro.3}}</td>
-                <td>{{perro.4}}</td>
-                <td>{{perro.5}}</td>
-                <td>{{perro.6}}</td>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td>
+                <td>{{i.2}}</td>
+                <td>{{i.3}}</td>
+                <td>{{i.4}}</td>
+                <td>{{i.5}}</td>
+                <td>{{i.6}}</td>
+                <td>
+                  <a href="/edit">Editar</a>
+                  <a href="/delete">Eliminar</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
       </table>
+    </div>
 {% endblock %}
