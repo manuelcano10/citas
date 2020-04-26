@@ -1,7 +1,29 @@
 {% extends "layout.html"%}
 {% block content %}
-<div class="container">
-    <div align="center"><img src="static/imagenes/coomeva.jpg" style="width:450px;height:370px;"></div>
-    <h1>Gracias por elegirnos como su EPS confiable. Favor ingrese al apartado de <a style="color: red;">Citas</a> para asignar una.</h1>
-</div>
+    <h1 style="text-align: center;">Citas Asignadas</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Barrio</th>
+            <th scope="col">Celular</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for perro in quotes %} <!--Se puede utilizar cualquier palabra, en este caso "perro"-->
+            <tr> 
+                <td>{{perro.0}}</td>
+                <td>{{perro.1}}</td>
+                <td>{{perro.3}}</td>
+                <td>{{perro.4}}</td>
+                <td>{{perro.5}}</td>
+                <td>{{perro.6}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
 {% endblock %}
