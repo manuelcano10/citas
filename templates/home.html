@@ -1,3 +1,11 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+  <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
 {% extends "layout.html"%}
 {% block content %}
     <br>
@@ -29,8 +37,8 @@
                 <td>{{i.5}}</td>
                 <td>{{i.6}}</td>
                 <td>
-                  <a href="/edit">Editar</a>
-                  <a href="/delete">Eliminar</a>
+                  <a href="/edit/{{i.0}}">Editar</a>
+                  <a href="/delete/{{i.0}}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
