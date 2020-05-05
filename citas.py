@@ -6,7 +6,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'citas'
-mysql = MySQL(app)
+dbquotes = MySQL(app)
 
 #configuraciones
 app.secret_key= 'mysecretkey'
@@ -14,7 +14,7 @@ app.secret_key= 'mysecretkey'
 @app.route('/')
 def index():
     sql = "SELECT * FROM citasapp"
-    cur = mysql.connection.cursor()
+    cur = dbquotes.connection.cursor()
     cur.execute(sql)
     result = cur.fetchall()
     return render_template('home.html', quotes = result)
@@ -27,9 +27,9 @@ def citas():
 
 @app.route('/delete/<string:nombre>')
 def delete(nombre):
-    cur = mysql.connection.cursor()
+    cur = dbquotes.connection.cursor()
     cur.execute('DELETE FROM citasapp WHERE nombre = {0}',format(nombre))
-    mysql.connection.commit()
+    dbquotes.connection.commit()
     flash('Cita removida con exito!')
     return redirect(url_for('index'))
 
@@ -43,10 +43,10 @@ def addquote():
         city = request.form['city']
         neighborhood = request.form['neighborhood']
         mobile = request.form['mobile']
-        cur = mysql.connection.cursor()
+        cur = dbquotes.connection.cursor()
         sql = f"INSERT INTO citasapp (nombre,apellido,documento,fecha_nacimiento,ciudad,barrio,celular) VALUES ('{name}','{surname}','{document}','{birth_date}','{city}','{neighborhood}','{mobile}')"
         cur.execute(sql)
-        mysql.connection.commit()
+        dbquotes.connection.commit()
         flash('Cita agendada con Exito!')
         return redirect(url_for('index'))
     return "Error"
